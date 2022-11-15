@@ -12,11 +12,11 @@ export default function HomePage() {
             alt="logo"
             style={{ marginBottom: 12 }}
           />
-          Activities
+          Activitiez
         </Header>
-        <Header as="h2" inverted content="Welcome to Activities" />
+        <Header as="h2" inverted content="Welcome to Activitiez" />
         <Button as={Link} to="/activities" size="huge" inverted>
-          Take me to the Activities!
+          Take me to the Activitiez!
         </Button>
       </Container>
     </Segment>

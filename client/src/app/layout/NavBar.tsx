@@ -13,7 +13,7 @@ export default observer(function NavBar() {
             alt="logo"
             style={{ marginRight: "10px" }}
           />
-          Reactivities
+          Activitiez
         </Menu.Item>
         <Menu.Item as={NavLink} to="/activities" name="Activities" />
         <Menu.Item>
