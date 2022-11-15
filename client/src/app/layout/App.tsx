@@ -15,7 +15,7 @@ function App() {
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
-        render={() => {
+        render={() => (
           <>
             <NavBar />
             <Container style={{ marginTop: "7em" }}>
@@ -27,8 +27,8 @@ function App() {
                 component={ActivityForm}
               />
             </Container>
-          </>;
-        }}
+          </>
+        )}
       />
     </>
   );
