@@ -5,6 +5,9 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using Application.Core;
 using API.Extensions;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using API.Middleware;
 
 namespace API
 {
@@ -19,7 +22,9 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddValidatorsFromAssemblyContaining<Edit>();
             services.AddControllers();
             services.AddApplicationServices(_config);
         }
@@ -27,9 +32,10 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }

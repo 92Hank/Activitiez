@@ -1,23 +1,27 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import "react-calendar/dist/Calendar.css"
+import "react-calendar/dist/Calendar.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import "./app/layout/styles.css";
 import App from "./app/layout/App";
 import reportWebVitals from "./reportWebVitals";
 import { store, StoreContext } from "./app/stores/store";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
+// export const history = require("history").createBrowserHistory;
+// let history = useHistory();
+export const history = createBrowserHistory();
+
+ReactDOM.render(
   // <React.StrictMode>
   <StoreContext.Provider value={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StoreContext.Provider>
+      <Router history={history}>
+        <App />
+      </Router>
+  </StoreContext.Provider>,
   // </React.StrictMode>
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
