@@ -5,8 +5,8 @@ import { Profile } from "../../app/models/profile";
 import { useStore } from "../../app/stores/store";
 import ProfileAbout from "./ProfileAbout";
 import ProfileActivities from "./ProfileActivities";
-import ProfileFollowings from "./ProfileFollowings";
 import ProfilePhotos from "./ProfilePhotos";
+import ProfileFollowings from "./ProfileFollowings";
 
 interface Props {
   profile: Profile;
