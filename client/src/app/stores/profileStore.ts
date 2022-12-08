@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Photo, Profile, UserActivity } from "../models/profile";
 import { toast } from "react-toastify";
@@ -17,6 +17,22 @@ export default class ProfileStore {
 
     constructor() {
         makeAutoObservable(this);
+
+        reaction(
+            () => this.activeTab,
+            activeTab => {
+                if (activeTab === 3 || activeTab === 4) {
+                    const predicate = activeTab === 3 ? 'followers' : 'following';
+                    this.loadFollowings(predicate);
+                } else {
+                    this.followings = [];
+                }
+            }
+        )
+    }
+
+    setActiveTab = (activeTab: any) => {
+        this.activeTab = activeTab;
     }
 
     get isCurrentUser() {
@@ -123,15 +139,15 @@ export default class ProfileStore {
                 if (this.profile
                     && this.profile.username !== store.userStore.user?.username
                     && this.profile.username === username) {
-                    following ? this.profile.followersCount!++ : this.profile.followersCount!--;
+                    following ? this.profile.followersCount++ : this.profile.followersCount--;
                     this.profile.following = !this.profile.following;
                 }
                 if (this.profile && this.profile.username === store.userStore.user?.username) {
-                    following ? this.profile.followingCount!++ : this.profile.followingCount!--;
+                    following ? this.profile.followingCount++ : this.profile.followingCount--;
                 }
                 this.followings.forEach(profile => {
                     if (profile.username === username) {
-                        profile.following ? profile.followersCount!-- : profile.followersCount!++
+                        profile.following ? profile.followersCount-- : profile.followersCount++
                         profile.following = !profile.following;
                     }
                 })
