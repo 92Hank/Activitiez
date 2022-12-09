@@ -13,8 +13,8 @@ RUN dotnet restore "Activitiez.sln"
 
 # copy everything else and build
 COPY . .
-WORKDIR /app
-RUN dotnet publish -c Release -o out
+WORKDIR /App
+RUN dotnet publish "Activitiez.sln" -c Release -o out
 
 # build a runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
