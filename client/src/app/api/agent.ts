@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import { toast } from "react-toastify";
 import { Activity, ActivityFormValues } from "../models/activity";
 import { store } from "../stores/store";
-import { history } from '../..';
+import { router } from '../router/Routes';
 import { User, UserFormValues } from "../models/user";
 import { Photo, Profile, UserActivity } from "../models/profile";
 import { PaginatedResult } from "../models/pagination";
@@ -40,7 +40,7 @@ axios.interceptors.response.use(async (response) => {
                 });
             }
             if (config.method === "get" && data.errors.hasOwnProperty("id")) {
-                history.push("/not-found");
+                router.navigate('/not-found');
             }
             if (data.errors) {
                 const modalStateErrors = [];
@@ -58,11 +58,11 @@ axios.interceptors.response.use(async (response) => {
             });
             break;
         case 404:
-            history.push("/not-found");
+            router.navigate('/not-found');
             break;
         case 500:
             store.commonStore.setServerError(data);
-            history.push("/server-error");
+            router.navigate('/server-error');
             toast.error("server error", {
                 theme: "colored"
             });
