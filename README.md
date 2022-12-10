@@ -1,3 +1,3 @@
 # Activitiez
 
-App deployed via fly.io = https://activitiez.fly.dev/
+App deployed via fly.io = Link to website >> [here](https://activitiez.fly.dev) <<
