@@ -27,7 +27,7 @@ export default function ActivityListItem({ activity }: Props) {
               style={{ marginBottom: 4 }}
               size="tiny"
               circular
-              src={activity.host?.image}
+              src={activity.host?.image || "/assets/user.png"}
             />
             <Item.Content>
               <Item.Header as={Link} to={`/activities/${activity.id}`}>
