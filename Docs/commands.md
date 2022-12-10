@@ -9,3 +9,5 @@ push latest to docker Hub
 command = docker push henke92/activitiez
 
 Launch an app on Fly = flyctl launch --image henke92/activitiez:latest
+
+flyctl proxy 6543:5432 -a activitiez-db
